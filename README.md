@@ -1,5 +1,5 @@
 # DataBookPro
-这是利用闲暇时间，基于影刀`DataBook`模块进行二次开发和封装，支持更加python风格的数据读写操作，类似于pandas。
+这是利用闲暇时间，基于影刀`DataBook`模块进行二次开发和封装，支持更加python风格的数据读写操作，类似于pandas。由于个人精力有限，因此不能保证代码没有bug，如果再使用的过程中遇到bug了，或者有希望实现的功能，欢迎到[issue](https://github.com/RPA-bottle/databookpro/issues)提交~
 
 
 # 基础使用
