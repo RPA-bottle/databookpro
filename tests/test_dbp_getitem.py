@@ -24,6 +24,10 @@ class GetitemWithoutParsed(unittest.TestCase):
     def test_getitem(self):
         self.assertEqual(dbp.loc[1, 'A'], '1')
         self.assertEqual(dbp.loc[2, 'A'], 'a')
+        self.assertListEqual(dbp.loc[:, 'A'], ['1',  'a', '5'])
+        self.assertListEqual(dbp.loc[:, :], [['1', '2', '3', '4'], ['a', 'b', 'c', 'd'], ['5', '6', '7', '8']])
+        self.assertListEqual(dbp.loc[:, 'B':], [['2', '3', '4'], ['b', 'c', 'd'], ['6', '7', '8']])
+        self.assertListEqual(dbp.loc[:, :'B'], [['1', '2'], ['a', 'b'], ['5', '6']])
         self.assertListEqual(dbp.loc[1:2, 'B'], ['2', 'b'])
         self.assertListEqual(dbp.loc[1:3, 'B'], ['2', 'b', '6'])
         self.assertListEqual(dbp.loc[1:2, ['B', 'C']], [['2', '3'], ['b', 'c']])
@@ -52,6 +56,10 @@ class GetitemWithParsedNumber(unittest.TestCase):
     def test_getitem(self):
         self.assertEqual(dbp.loc[1, 'A'], 1)
         self.assertEqual(dbp.loc[2, 'A'], 'a')
+        self.assertListEqual(dbp.loc[:, 'A'], [1,  'a', 5])
+        self.assertListEqual(dbp.loc[:, :], [[1, 2, 3, 4], ['a', 'b', 'c', 'd'], [5, 6, 7, 8]])
+        self.assertListEqual(dbp.loc[:, 'B':], [[2, 3, 4], ['b', 'c', 'd'], [6, 7, 8]])
+        self.assertListEqual(dbp.loc[:, :'B'], [[1, 2], ['a', 'b'], [5, 6]])
         self.assertListEqual(dbp.loc[1:2, 'B'], [2, 'b'])
         self.assertListEqual(dbp.loc[1:3, 'B'], [2, 'b', 6])
         self.assertListEqual(dbp.loc[1:2, ['B', 'C']], [[2, 3], ['b', 'c']])

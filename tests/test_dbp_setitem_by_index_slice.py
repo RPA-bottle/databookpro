@@ -62,6 +62,11 @@ class SetitemByIndexSliceToEmptyDataBook(unittest.TestCase):
         self.assertListEqual(db.get_range(1, 'A', 4, 'C'), 
                              [[None]*3]+[['1', None, '2'], ['3', None, '4'], ['5', None, '6']])
 
+    def test_set_10(self):
+        dbp.loc[dbp.shape[0]+1:] = [3, 3, 3]
+        self.assertListEqual(db.get_range(1, 'A', 2, 'C'), 
+                             [['3']*3, [None]*3])
+
 
     # def tearDown(self) -> None:
     #     dbp.clear()
@@ -120,6 +125,11 @@ class SetitemByIndexSlice(unittest.TestCase):
         dbp.loc[2:4, ['A', 'C']] = [[1, 2], [3, 4], [5, 6]]
         self.assertListEqual(db.get_range(1, 'A', 4, 'C'), 
                              [['1', None, None]]+[['1', None, '2'], ['3', None, '4'], ['5', None, '6']])
+    
+    def test_set_10(self):
+        dbp.loc[dbp.shape[0]+1:] = [3, 3, 3]
+        self.assertListEqual(db.get_range(1, 'A', 4, 'C'), 
+                             [['1', None, None]]+[['2', None, None], ['3', None, None], ['3', '3', '3']])
 
 
 # del SetitemByIndexSliceToEmptyDataBook, SetitemByIndexSlice

@@ -1,5 +1,6 @@
 
 from xbot.app import databook as db
+from xbot import print
 
 import os
 import ast
@@ -377,7 +378,7 @@ class Location(DataBookBase):
         # 检查idxs是否匹配value
         if idxs.start is None and idxs.stop is None:
             row_start = 1
-            if shape[0] == 1:
+            if shape[0] in [0, 1]:
                 row_stop = 1 if self.empty else self.nrows
             else:
                 row_stop = shape[0]
@@ -388,15 +389,15 @@ class Location(DataBookBase):
             row_start = 1
             row_stop = idxs.stop if idxs.stop > 0 else idxs.stop + self.nrows + 1
             nrows = row_stop - row_start + 1
-            if shape[0] != 1:
+            if shape[0] not in [0, 1]:
                 if row_stop != shape[0]:
                     raise ValueError(f'Length of values({shape[0]}) does not match length '
                         f'of index ({nrows})')
         elif idxs.stop is None:
             row_start = idxs.start if idxs.start > 0 else self.nrows + idxs.start + 1
             row_start = row_start if row_start > 0 else 1
-            if shape[0] == 1:
-                row_stop = 1 if self.empty else self.nrows            
+            if shape[0] in [0, 1]:
+                row_stop = 1 if self.empty else self.nrows + shape[0]
             else:
                 row_stop = row_start + shape[0] - 1
         else:
@@ -658,11 +659,11 @@ class Location(DataBookBase):
 
         # 获取数据
         if isinstance(idxs, slice) and isinstance(names, slice):
-            row_start, row_stop, nrows = self._infer_slc_idxs(idxs, (1, 1))
+            row_start, row_stop, nrows = self._infer_slc_idxs(idxs, (0, 0))
             name_start, name_stop, ncols = self._infer_slc_names(names, (1, 1))
             data = np.array(db.get_range(row_start, name_start, row_stop, name_stop))
         elif isinstance(idxs, slice):
-            row_start, row_stop, nrows = self._infer_slc_idxs(idxs, (1, 1))
+            row_start, row_stop, nrows = self._infer_slc_idxs(idxs, (0, 0))
             data = np.array([db.get_range(row_start, name, row_stop, name) for name in names])
             data = data.T[0]
         elif isinstance(names, slice):

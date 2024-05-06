@@ -55,6 +55,15 @@ class SetitemByBothSliceToEmptyDataBook(unittest.TestCase):
         self.assertListEqual(db.get_range(1, 'A', 3, 'C'), 
                              [[None]*3, [None, '1', '2'], [None, '3', '4']])
 
+    def test_set_08(self):
+        dbp.loc[:, 'B':'C'] = [[1, 2], [3, 4]]
+        self.assertListEqual(db.get_range(1, 'A', 2, 'C'), [[None, '1', '2'], [None, '3', '4']])
+
+    def test_set_08(self):
+        dbp.loc[:] = [[1, 2], [3, 4]]
+        self.assertListEqual(db.get_range(1, 'A', 2, 'C'), [['1', '2', None], ['3', '4', None]])
+
+
 # del SetitemByBothSliceToEmptyDataBook
 
 
