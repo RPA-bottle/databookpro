@@ -1,0 +1,7 @@
+**/__pycache/
+/resources/
+/.vscode/
+/.dev/
+
+*.pyc
+
