@@ -7,6 +7,7 @@
 
 下面是简单的例子。
 ```python
+# example.py
 from xbot import print
 from .databookpro import dbp
 
@@ -65,6 +66,8 @@ def main(args):
     # 获取前两行、前两列数据，数据类型将是`pandas.DataFrame`类型
     data = dbp.loc[:2, :'B']
     print(data)
+    # 改回返回列表类型的数据
+    dbp.output_format = 'raw'
 ```
 
 # 注意
@@ -72,7 +75,7 @@ def main(args):
 
 另外，`databookpro`与`pandas`的读写数据逻辑并不是完全一致的，显著的差异如下：
 - 行号  
-  行号只能是整数，而且从1开始计数。
+  行号只能是整数，而且从1开始计数。pandas的行号可以是任意类型的值。
 - 列名  
   dbp会自动识别列名和列描述，列名只能是A-Z组成的字符串，例如：“A”和“AB”。pandas的列名是任意的，而且没有列描述。
 - 布尔类型、函数类型的索引  
