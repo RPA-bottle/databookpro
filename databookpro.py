@@ -22,9 +22,6 @@ except:
 from openpyxl.utils import get_column_letter, get_column_interval, column_index_from_string
 import re
 
-import time
-from itertools import product
-
 
 '''
 TODO
@@ -719,3 +716,6 @@ class Location(DataBookBase):
         return value
 
 
+dbp = DataBookPro()
+
+__all__ = ['dbp']
